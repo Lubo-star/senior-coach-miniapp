@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senior Coach</title>
+</head>
+
+<body>
+  <h1>Senior Coach</h1>
+
+  <h2>Váš osobní průvodce pro každý den</h2>
+
+  <p>
+    Senior Coach je jednoduchý pomocník pro seniory.
+    Můžete si s ním povídat, hledat informace
+    a získat podporu při každodenních situacích.
+  </p>
+
+  <button onclick="startCoach()">Začít rozhovor</button>
+
+  <p id="message"></p>
+
+  <script>
+    function startCoach() {
+      document.getElementById("message").innerHTML =
+        "Dobrý den. Jsem Senior Coach. S čím vám dnes mohu pomoci?";
+    }
+
+    if (window.bridge && window.bridge.app && window.bridge.app.ready) {
+      window.bridge.app.ready();
+    }
+  </script>
+</body>
+</html>
