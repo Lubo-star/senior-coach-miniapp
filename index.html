@@ -17,66 +17,103 @@ body {
 
 .container {
     max-width: 720px;
-    margin: 40px auto;
-    padding: 30px;
+    margin: 30px auto;
+    padding: 25px;
+}
+
+.card {
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
 }
 
 h1 {
-    color: #178f87;
     font-size: 34px;
+    margin-top: 0;
+}
+
+.intro {
+    line-height: 1.6;
 }
 
 h2 {
-    font-size: 24px;
+    margin-top: 30px;
+    font-size: 25px;
 }
 
-button {
+.choice {
     display: block;
     width: 100%;
+    margin: 14px 0;
     padding: 18px;
-    margin: 12px 0;
     border: none;
     border-radius: 12px;
-    background: #24a9a0;
+    background: #168c83;
     color: white;
-    font-size: 20px;
+    font-size: 21px;
     cursor: pointer;
 }
 
-button:hover {
-    background: #188f87;
+.choice:hover {
+    background: #11766f;
 }
 
-#answer {
+.answer {
     margin-top: 22px;
     padding: 20px;
-    background: #eef6f5;
+    background: #eef7f6;
     border-radius: 12px;
+    line-height: 1.5;
+    min-height: 30px;
+}
+
+.question-box {
+    margin-top: 32px;
+    padding-top: 25px;
+    border-top: 2px solid #e5eeee;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
 textarea {
-    width: 100%;
     box-sizing: border-box;
-    min-height: 120px;
+    width: 100%;
+    min-height: 110px;
     padding: 15px;
-    margin-top: 20px;
-    border: 2px solid #b8cfcc;
+    border: 2px solid #9eafad;
     border-radius: 12px;
-    font-size: 20px;
     font-family: Arial, sans-serif;
+    font-size: 20px;
+    resize: vertical;
 }
 
 .send {
-    background: #176d68;
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    background: #245b88;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.footer {
+.send:hover {
+    background: #1c496e;
+}
+
+footer {
     text-align: center;
-    margin-top: 30px;
-    color: #687878;
+    margin-top: 25px;
+    color: #667;
     font-size: 16px;
 }
 </style>
@@ -85,77 +122,95 @@ textarea {
 <body>
 
 <div class="container">
+<div class="card">
 
 <h1>Dobrý den 👋</h1>
 
-<p>
-Jsem Senior Coach. Můžete si se mnou povídat,
-hledat informace nebo získat jednoduchou pomoc
-při každodenních situacích.
+<p class="intro">
+Jsem <strong>Senior Coach</strong>. Můžete si se mnou povídat,
+hledat informace nebo získat jednoduchou pomoc při každodenních situacích.
 </p>
 
 <h2>S čím vám dnes mohu pomoci?</h2>
 
-<button onclick="choose('talk')">💬 Chci si popovídat</button>
+<button class="choice" onclick="showAnswer('chat')">
+💬 Chci si popovídat
+</button>
 
-<button onclick="choose('help')">🤝 Potřebuji poradit</button>
+<button class="choice" onclick="showAnswer('help')">
+💛 Potřebuji poradit
+</button>
 
-<button onclick="choose('learn')">📚 Chci se něco naučit</button>
+<button class="choice" onclick="showAnswer('learn')">
+📚 Chci se něco naučit
+</button>
 
-<button onclick="choose('family')">❤️ Rodina a každodenní život</button>
+<button class="choice" onclick="showAnswer('family')">
+❤️ Rodina a každodenní život
+</button>
 
-<div id="answer">
-<strong>Jsem tady pro vás.</strong>
-<p>Můžete vybrat jednu z možností nebo napsat vlastní otázku.</p>
+<div id="answer" class="answer">
+Vyberte jednu z možností nebo mi napište vlastní otázku.
 </div>
+
+<div class="question-box">
+
+<label for="question">
+Nebo mi napište vlastní otázku:
+</label>
 
 <textarea
 id="question"
-placeholder="Napište sem, co vás zajímá...">
+placeholder="Například: Jak si zvětším písmo v telefonu?">
 </textarea>
 
 <button class="send" onclick="sendQuestion()">
 Odeslat otázku
 </button>
 
-<div class="footer">
-Senior Coach • jednoduchá pomoc pro každý den
 </div>
+
+</div>
+
+<footer>
+Senior Coach • jednoduchá pomoc pro každý den
+</footer>
 
 </div>
 
 <script>
-
-function choose(type) {
+function showAnswer(type) {
 
     const answer = document.getElementById("answer");
 
-    if (type === "talk") {
+    if (type === "chat") {
         answer.innerHTML =
-        "<strong>Rád si s vámi popovídám.</strong><p>Jaký jste měl dnes den?</p>";
+        "<strong>Jsem tady pro vás.</strong><p>Napište, o čem byste si dnes chtěli povídat.</p>";
     }
 
     if (type === "help") {
         answer.innerHTML =
-        "<strong>Samozřejmě.</strong><p>Popište mi, s čím potřebujete pomoci.</p>";
+        "<strong>Samozřejmě.</strong><p>Popište mi, s čím potřebujete pomoci, a zkusíme to společně krok za krokem.</p>";
     }
 
     if (type === "learn") {
         answer.innerHTML =
-        "<strong>Co vás zajímá?</strong><p>Můžeme probrat například telefon, internet, cestování nebo běžné každodenní otázky.</p>";
+        "<strong>Co vás zajímá?</strong><p>Můžeme společně probrat například telefon, internet, cestování nebo běžné každodenní otázky.</p>";
     }
 
     if (type === "family") {
         answer.innerHTML =
         "<strong>Povídejte.</strong><p>Můžeme probrat rodinu, samotu, každodenní starosti nebo prostě to, co máte právě na mysli.</p>";
     }
-
 }
 
 function sendQuestion() {
 
-    const question = document.getElementById("question").value.trim();
-    const answer = document.getElementById("answer");
+    const question =
+        document.getElementById("question").value.trim();
+
+    const answer =
+        document.getElementById("answer");
 
     if (question === "") {
         answer.innerHTML =
@@ -164,12 +219,15 @@ function sendQuestion() {
     }
 
     answer.innerHTML =
-    "<strong>Vaše otázka:</strong><p>" +
-    question +
-    "</p><strong>Rozumím.</strong><p>Dalším krokem bude připojení skutečného AI Senior Coache, který vám na tuto otázku odpoví.</p>";
+        "<strong>Vaše otázka:</strong><p>" +
+        question +
+        "</p><strong>Otázka byla přijata.</strong><p>V dalším kroku připojíme skutečného AI Senior Coache, který vám bude odpovídat.</p>";
 
+    answer.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
 }
-
 </script>
 
 </body>
