@@ -12,164 +12,162 @@ body {
     font-family: Arial, sans-serif;
     background: #f4f8f7;
     color: #263238;
-}
-
-header {
-    background: #28786f;
-    color: white;
-    padding: 28px 20px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 36px;
-}
-
-header p {
-    font-size: 19px;
-    margin-bottom: 0;
-}
-
-main {
-    max-width: 720px;
-    margin: 30px auto;
-    padding: 20px;
-}
-
-.card {
-    background: white;
-    border-radius: 18px;
-    padding: 28px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
-}
-
-.card h2 {
-    color: #28786f;
-    font-size: 26px;
-}
-
-.intro {
-    font-size: 19px;
-    line-height: 1.6;
-}
-
-.question {
-    margin-top: 25px;
     font-size: 20px;
-    font-weight: bold;
+}
+
+.container {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
+
+h1 {
+    color: #178f87;
+    font-size: 34px;
+}
+
+h2 {
+    font-size: 24px;
 }
 
 button {
     display: block;
     width: 100%;
+    padding: 18px;
     margin: 12px 0;
-    padding: 17px;
     border: none;
     border-radius: 12px;
-    background: #28786f;
+    background: #24a9a0;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
 }
 
 button:hover {
-    background: #1f625b;
+    background: #188f87;
 }
 
-#message {
-    display: none;
-    margin-top: 25px;
+#answer {
+    margin-top: 22px;
     padding: 20px;
-    background: #e8f4f2;
+    background: #eef6f5;
     border-radius: 12px;
-    font-size: 18px;
-    line-height: 1.5;
 }
 
-footer {
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 120px;
+    padding: 15px;
+    margin-top: 20px;
+    border: 2px solid #b8cfcc;
+    border-radius: 12px;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.send {
+    background: #176d68;
+}
+
+.footer {
     text-align: center;
-    padding: 25px;
-    color: #667;
+    margin-top: 30px;
+    color: #687878;
+    font-size: 16px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Senior Coach</h1>
-    <p>Váš osobní průvodce pro každý den</p>
-</header>
+<div class="container">
 
-<main>
+<h1>Dobrý den 👋</h1>
 
-<div class="card">
-
-<h2>Dobrý den 👋</h2>
-
-<p class="intro">
+<p>
 Jsem Senior Coach. Můžete si se mnou povídat,
 hledat informace nebo získat jednoduchou pomoc
 při každodenních situacích.
 </p>
 
-<p class="question">
-S čím vám dnes mohu pomoci?
-</p>
+<h2>S čím vám dnes mohu pomoci?</h2>
 
-<button onclick="answer('talk')">
-💬 Chci si popovídat
+<button onclick="choose('talk')">💬 Chci si popovídat</button>
+
+<button onclick="choose('help')">🤝 Potřebuji poradit</button>
+
+<button onclick="choose('learn')">📚 Chci se něco naučit</button>
+
+<button onclick="choose('family')">❤️ Rodina a každodenní život</button>
+
+<div id="answer">
+<strong>Jsem tady pro vás.</strong>
+<p>Můžete vybrat jednu z možností nebo napsat vlastní otázku.</p>
+</div>
+
+<textarea
+id="question"
+placeholder="Napište sem, co vás zajímá...">
+</textarea>
+
+<button class="send" onclick="sendQuestion()">
+Odeslat otázku
 </button>
 
-<button onclick="answer('help')">
-🤝 Potřebuji poradit
-</button>
-
-<button onclick="answer('learn')">
-📚 Chci se něco naučit
-</button>
-
-<button onclick="answer('family')">
-❤️ Rodina a každodenní život
-</button>
-
-<div id="message"></div>
+<div class="footer">
+Senior Coach • jednoduchá pomoc pro každý den
+</div>
 
 </div>
 
-</main>
-
-<footer>
-Senior Coach • jednoduchá pomoc pro každý den
-</footer>
-
 <script>
 
-function answer(type) {
+function choose(type) {
 
-    const message = document.getElementById("message");
-    message.style.display = "block";
+    const answer = document.getElementById("answer");
 
     if (type === "talk") {
-        message.innerHTML =
-        "<strong>Jsem tady pro vás.</strong><br><br>Napište, o čem byste si dnes chtěli povídat.";
+        answer.innerHTML =
+        "<strong>Rád si s vámi popovídám.</strong><p>Jaký jste měl dnes den?</p>";
     }
 
     if (type === "help") {
-        message.innerHTML =
-        "<strong>Samozřejmě.</strong><br><br>Popište mi, s čím potřebujete pomoci, a zkusíme to společně krok za krokem.";
+        answer.innerHTML =
+        "<strong>Samozřejmě.</strong><p>Popište mi, s čím potřebujete pomoci.</p>";
     }
 
     if (type === "learn") {
-        message.innerHTML =
-        "<strong>Co vás zajímá?</strong><br><br>Můžeme společně probrat například telefon, internet, cestování nebo běžné každodenní otázky.";
+        answer.innerHTML =
+        "<strong>Co vás zajímá?</strong><p>Můžeme probrat například telefon, internet, cestování nebo běžné každodenní otázky.</p>";
     }
 
     if (type === "family") {
-        message.innerHTML =
-        "<strong>Povídejte.</strong><br><br>Můžeme probrat rodinu, samotu, každodenní starosti nebo prostě to, co máte právě na mysli.";
+        answer.innerHTML =
+        "<strong>Povídejte.</strong><p>Můžeme probrat rodinu, samotu, každodenní starosti nebo prostě to, co máte právě na mysli.</p>";
     }
+
+}
+
+function sendQuestion() {
+
+    const question = document.getElementById("question").value.trim();
+    const answer = document.getElementById("answer");
+
+    if (question === "") {
+        answer.innerHTML =
+        "<strong>Napište mi prosím svou otázku.</strong>";
+        return;
+    }
+
+    answer.innerHTML =
+    "<strong>Vaše otázka:</strong><p>" +
+    question +
+    "</p><strong>Rozumím.</strong><p>Dalším krokem bude připojení skutečného AI Senior Coache, který vám na tuto otázku odpoví.</p>";
+
 }
 
 </script>
