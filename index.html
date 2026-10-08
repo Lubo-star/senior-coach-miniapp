@@ -233,7 +233,7 @@ async function sendQuestion() {
       throw new Error("Server neodpověděl správně.");
     }
 
-    answer.textContent = data.answer;
+  answer.textContent = data.answer.replaceAll("###", "").replaceAll("**", "");
 
   } catch (error) {
     answer.textContent =
