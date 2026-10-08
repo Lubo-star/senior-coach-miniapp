@@ -204,29 +204,46 @@ function showAnswer(type) {
     }
 }
 
-function sendQuestion() {
+async function sendQuestion() {
+  const question = document.getElementById("question").value.trim();
+  const answer = document.getElementById("answer");
 
-    const question =
-        document.getElementById("question").value.trim();
+  if (question === "") {
+    answer.textContent = "Napište mi prosím svou otázku.";
+    return;
+  }
 
-    const answer =
-        document.getElementById("answer");
+  answer.textContent = "Chvilku prosím, přemýšlím…";
 
-    if (question === "") {
-        answer.innerHTML =
-        "<strong>Napište mi prosím svou otázku.</strong>";
-        return;
+  try {
+    const response = await fetch(
+      "https://broad-dream-8901.signum-144.workers.dev/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ question: question })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Server neodpověděl správně.");
     }
 
-    answer.innerHTML =
-        "<strong>Vaše otázka:</strong><p>" +
-        question +
-        "</p><strong>Otázka byla přijata.</strong><p>V dalším kroku připojíme skutečného AI Senior Coache, který vám bude odpovídat.</p>";
+    answer.textContent = data.answer;
 
-    answer.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
+  } catch (error) {
+    answer.textContent =
+      "Omlouvám se, spojení se nyní nepodařilo. Zkuste to prosím znovu.";
+  }
+
+  answer.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
 }
 </script>
 
